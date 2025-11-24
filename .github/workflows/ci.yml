@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify site folder and index
+        run: |
+          if [ ! -f site/index.html ]; then
+            echo "ERRO: site/index.html não encontrado"
+            exit 1
+          fi
+          echo "Arquivo index.html encontrado com sucesso!"
